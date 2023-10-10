@@ -32,8 +32,10 @@ function contentTypeFor(filename: string): string {
   return 'text/plain';
 }
 
+const port = process.env.PORT || 3000;
+
 const server = Bun.serve({
-  port: 3000,
+  port,
   async fetch(request) {
     const [username, gisthash, filename, ...fragments] = new URL(request.url).pathname.split('/').filter(Boolean);
     if (!username) {
